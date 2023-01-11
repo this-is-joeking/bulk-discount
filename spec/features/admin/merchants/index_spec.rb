@@ -91,6 +91,8 @@ RSpec.describe 'Admin Merchants index' do
     within('#top_by_revenue') do
       expect(page).to have_content('Osinski, Pollich and Koelpin - $227,757.77')
       expect(page).to have_content('Cummings-Thiel - $84,012.06')
+      click_on('Osinski, Pollich and Koelpin')
+      expect(current_path).to eq(admin_merchant_path(Merchant.find(8)))
     end
   end
 

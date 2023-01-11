@@ -15,7 +15,7 @@ class Item < ApplicationRecord
   end
 
   def best_day_by_revenue
-    invoices.joins(:transactions)
+    self.invoices.joins(:transactions)
             .where(transactions: { result: 'success' })
             .select('date(invoices.created_at) as invoice_date, sum(invoice_items.unit_price * invoice_items.quantity) as total_date_revenue')
             .group('invoice_date')

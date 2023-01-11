@@ -15,7 +15,7 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship_items
-    items.select('distinct items.*, invoices.created_at as invoice_created_at, invoice_items.invoice_id, invoice_items.status')
+    self.items.select('distinct items.*, invoices.created_at as invoice_created_at, invoice_items.invoice_id, invoice_items.status')
          .joins(:invoice_items, :invoices)
          .where(invoice_items: { status: 1 })
          .where('invoice_items.invoice_id = invoices.id')
@@ -32,15 +32,15 @@ class Merchant < ApplicationRecord
   end
 
   def get_enabled_items
-    items.where(enabled: true)
+    self.items.where(enabled: true)
   end
 
   def get_disabled_items
-    items.where(enabled: false)
+    self.items.where(enabled: false)
   end
 
   def best_day_by_revenue
-    invoices.joins(:transactions)
+    self.invoices.joins(:transactions)
             .where(transactions: { result: 'success' })
             .select('date(invoices.created_at) as invoice_date, sum(invoice_items.unit_price * invoice_items.quantity) as total_date_revenue')
             .group('invoice_date')
@@ -55,7 +55,7 @@ class Merchant < ApplicationRecord
   end
 
   def top_5_items
-    items.select('items.*, sum(distinct invoice_items.unit_price * invoice_items.quantity / 100.00) as item_revenue')
+    self.items.select('items.*, sum(distinct invoice_items.unit_price * invoice_items.quantity / 100.00) as item_revenue')
          .joins(:invoice_items, :transactions)
          .where(transactions: { result: 'success' })
          .group(:id)

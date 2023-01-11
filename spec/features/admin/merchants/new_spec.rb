@@ -14,4 +14,14 @@ RSpec.describe 'Admin Merchant New' do
       expect(page).to have_button('Enable')
     end
   end
+
+  it 'Will not create if name is blank' do
+    visit new_admin_merchant_path
+
+    fill_in('merchant[name]', with: "")
+    click_button('Create Merchant')
+
+    expect(current_path).to eq(new_admin_merchant_path)
+    expect(page).to have_content("Merchant must have a name")
+  end
 end
