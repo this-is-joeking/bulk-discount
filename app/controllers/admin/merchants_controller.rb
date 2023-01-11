@@ -14,12 +14,16 @@ class Admin::MerchantsController < ApplicationController
   def update
     merchant = Merchant.find(params[:id])
 
-    merchant.update!(merchant_params)
+    if merchant.update(merchant_params)
 
-    return redirect_to admin_merchants_path if params[:merchant][:enabled]
+      return redirect_to admin_merchants_path if params[:merchant][:enabled]
 
-    redirect_to admin_merchant_path(merchant)
-    flash[:notice] = 'Merchant name has been changed'
+      redirect_to admin_merchant_path(merchant)
+      flash[:notice] = 'Merchant name has been changed'
+    else
+      flash[:notice] = 'Merchant must have a name'
+      redirect_to edit_admin_merchant_path(merchant)
+    end
   end
 
   def new
@@ -27,9 +31,14 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    Merchant.create!(merchant_params)
+    merchant = Merchant.new(merchant_params)
 
-    redirect_to admin_merchants_path
+    if merchant.save
+      redirect_to admin_merchants_path
+    else
+      flash[:notice] = 'Merchant must have a name'
+      redirect_to new_admin_merchant_path
+    end
   end
 
   private

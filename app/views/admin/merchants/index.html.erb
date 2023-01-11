@@ -30,7 +30,7 @@
     <h4>Top Merchants:</h4>
     <ol>
       <% Merchant.top_5_by_revenue.each do |merchant| %>
-        <li class='column'><%= merchant.name %> - <%= merchant.revenue_in_dollars %><br>
+        <li class='column'><%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= merchant.revenue_in_dollars %><br>
         The top selling date for <%= merchant.name %> was <%= merchant.best_day_by_revenue %>
         </li>
       <% end %>

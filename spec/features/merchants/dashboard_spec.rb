@@ -61,18 +61,18 @@ RSpec.describe 'The Merchant Dashboard' do
     expect(page).to have_content('Mike-Cummins')
   end
 
-  xit 'displays the number of commits next to each github username' do
+  it 'displays the number of commits next to each github username' do
     visit merchant_dashboard_path(1)
 
-    expect(page).to have_content('sambcox - 53 commits')
-    expect(page).to have_content('this-is-joeking - 29 commits')
-    expect(page).to have_content('ryancanton - 33 commits')
-    expect(page).to have_content('Mike-Cummins - 30 commits')
+    expect(page).to have_content('sambcox 66 commits')
+    expect(page).to have_content('this-is-joeking 33 commits')
+    expect(page).to have_content('ryancanton 36 commits')
+    expect(page).to have_content('Mike-Cummins 37 commits')
   end
 
-  xit 'displays the number of merged PRs for all team members' do
+  it 'displays the number of merged PRs for all team members' do
     visit merchant_dashboard_path(1)
 
-    expect(page).to have_content('42 Merged PRs')
+    expect(page).to have_content('54 Merged PRs')
   end
 end

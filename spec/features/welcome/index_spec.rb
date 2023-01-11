@@ -4,7 +4,7 @@ RSpec.describe 'Welcome Page' do
   it 'Displays all invoice IDs, each one links to the invoice show page' do
     visit '/'
 
-    expect(page).to have_link('Admin Dashboard', href: admin_dashboard_path)
+    expect(page).to have_link('Admin Dashboard', href: admin_path)
 
     fill_in('merchant_id', with: '1')
     click_on('Go to Merchant Dashboard')
