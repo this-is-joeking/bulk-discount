@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   include ActionView::Helpers::NumberHelper
-  before_action :github
+  # before_action :github
 
-  def github
-    @info = GithubInfo.new
-  end
+  # def github
+  #   @info = GithubInfo.new
+  # end
 end

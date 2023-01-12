@@ -49,33 +49,33 @@ RSpec.describe 'admin dashboard' do
     end
   end
 
-  it 'displays the name of the github repo' do
-    visit admin_path
+  # xit 'displays the name of the github repo' do
+  #   visit admin_path
 
-    expect(page).to have_content("sambcox/little-esty-shop")
-  end
+  #   expect(page).to have_content("sambcox/little-esty-shop")
+  # end
 
-  it 'displays all contibutors usernames' do
-    visit admin_path
+  # xit 'displays all contibutors usernames' do
+  #   visit admin_path
 
-    expect(page).to have_content('sambcox')
-    expect(page).to have_content('this-is-joeking')
-    expect(page).to have_content('ryancanton')
-    expect(page).to have_content('Mike-Cummins')
-  end
+  #   expect(page).to have_content('sambcox')
+  #   expect(page).to have_content('this-is-joeking')
+  #   expect(page).to have_content('ryancanton')
+  #   expect(page).to have_content('Mike-Cummins')
+  # end
 
-  it 'displays the number of commits next to each github username' do
-    visit admin_path
+  # xit 'displays the number of commits next to each github username' do
+  #   visit admin_path
 
-    expect(page).to have_content('sambcox 66 commits')
-    expect(page).to have_content('this-is-joeking 34 commits')
-    expect(page).to have_content('ryancanton 36 commits')
-    expect(page).to have_content('Mike-Cummins 38 commits')
-  end
+  #   expect(page).to have_content('sambcox 66 commits')
+  #   expect(page).to have_content('this-is-joeking 34 commits')
+  #   expect(page).to have_content('ryancanton 36 commits')
+  #   expect(page).to have_content('Mike-Cummins 38 commits')
+  # end
 
-  it 'displays the number of merged PRs for all team members' do
-    visit admin_path
+  # xit 'displays the number of merged PRs for all team members' do
+  #   visit admin_path
 
-    expect(page).to have_content('54 Merged PRs')
-  end
+  #   expect(page).to have_content('54 Merged PRs')
+  # end
 end
