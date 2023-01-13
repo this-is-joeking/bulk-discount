@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     scope module: 'merchants' do
       resources :items, except: :destroy
       resources :invoices, only: %i[index show]
+      resources :bulk_discounts, only: :index
     end
   end
 
