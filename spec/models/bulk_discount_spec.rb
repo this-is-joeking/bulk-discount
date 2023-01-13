@@ -9,8 +9,4 @@ RSpec.describe BulkDiscount do
     it {should validate_numericality_of :discount}
     it {should validate_numericality_of :qty_threshold}
   end
-
-  it '' do
-    require 'pry'; binding.pry
-  end
 end
