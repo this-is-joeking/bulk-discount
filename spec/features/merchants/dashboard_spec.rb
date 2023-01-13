@@ -46,6 +46,12 @@ RSpec.describe 'The Merchant Dashboard' do
     end
   end
 
+  it 'has a link to the merchants bulk discount index page' do
+    visit merchant_dashboard_path(1)
+
+    expect(page).to have_link('Bulk Discounts', href: merchant_bulk_discounts_path(1))
+  end
+
   # xit 'displays the name of the github repo' do
   #   visit merchant_dashboard_path(1)
 

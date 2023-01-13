@@ -1,0 +1,11 @@
+<%= render partial: 'merchants/shared/header' %>
+
+<h4>My Bulk Discounts</h4>
+<ul>
+  <% @bulk_discounts.each do |bd| %>
+    <li id="bd-<%= bd.id %>">
+      <%= "#{bd.discount}% off with purchase of #{bd.qty_threshold} items" %>
+      <%= link_to "View", merchant_bulk_discount_path(@merchant, bd) %>
+    </li>
+  <% end %>
+</ul>
