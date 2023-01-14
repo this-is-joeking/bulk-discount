@@ -6,13 +6,25 @@ class Merchants::BulkDiscountsController < ApplicationController
   end
 
   def show
-    @bulk_discount = BulkDiscount.find(params[:id])
+    # @merchant = Merchant.find(params[:merchant_id])
+
+    # @bulk_discount = BulkDiscount.find(params[:id])
   end
 
   def new
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = BulkDiscount.new
   end
 
   def create
+    merchant = Merchant.find(params[:merchant_id])
+    bd = merchant.bulk_discounts.new(bulk_discount_params)
+    if bd.save
+      redirect_to merchant_bulk_discounts_path(merchant)
+    else
+      flash[:notice] = bd.errors.full_messages.to_sentence
+      redirect_to new_merchant_bulk_discount_path
+    end
   end
 
   def edit
@@ -27,6 +39,6 @@ class Merchants::BulkDiscountsController < ApplicationController
   private
 
   def bulk_discount_params
-    params
+    params.require(:bulk_discount).permit(:discount, :qty_threshold)
   end
 end
