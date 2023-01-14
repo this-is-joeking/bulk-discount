@@ -41,6 +41,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # For creating seeds and test data 
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
+# For easy printing of tables in IRB and rails c
+gem 'table_print'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'capybara'
