@@ -61,4 +61,21 @@ RSpec.describe 'Merchants Invoice Show' do
       expect(page).to have_select('invoice_item[status]', selected: 'Pending')
     end
   end
+
+  it 'has a separate category  of total revenue including bulk discounts' do
+    merchant = Merchant.find(1)
+    invoice = merchant.invoices.first
+    bd = merchant.bulk_discounts.create!(discount: 10, qty_threshold: 9)
+    visit merchant_invoice_path(merchant, invoice)
+
+    expect(page).to have_content("Total invoice revenue: $21,067.77")
+    expect(page).to have_content("Total invoice revenue including bulk discount(s): $20,857.85")
+  end
 end
+
+# Total Revenue and Discounted Revenue As a merchant 
+# When I visit my merchant invoice show page 
+# Then I see the total revenue for my merchant from this invoice 
+# (not including discounts) 
+# And I see the total discounted revenue for my merchant from 
+# this invoice which includes bulk discounts in the calculation #9
