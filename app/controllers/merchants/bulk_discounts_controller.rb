@@ -23,14 +23,29 @@ class Merchants::BulkDiscountsController < ApplicationController
       redirect_to merchant_bulk_discounts_path(merchant)
     else
       flash[:notice] = bd.errors.full_messages.to_sentence
+
       redirect_to new_merchant_bulk_discount_path(merchant)
     end
   end
 
   def edit
+    @merchant = Merchant.find(params[:merchant_id])
+
+    @bulk_discount = BulkDiscount.find(params[:id])
   end
 
   def update
+    merchant = Merchant.find(params[:merchant_id])
+    bd = BulkDiscount.find(params[:id])
+
+    if bd.update(bulk_discount_params)
+      flash[:notice] = 'Bulk Discount Updated'
+      redirect_to merchant_bulk_discount_path(merchant, bd)
+    else
+      flash[:notice] = bd.errors.full_messages.to_sentence
+
+      redirect_to edit_merchant_bulk_discount_path(merchant, bd)
+    end
   end
 
   def destroy
