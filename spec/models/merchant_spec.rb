@@ -111,4 +111,18 @@ RSpec.describe Merchant do
       expect(Merchant.find(10).top_5_items).to eq([])
     end
   end
+
+  describe '#distinct_invoices' do
+    it 'returns distinct invoices related to the merchant' do
+      merchant1 = Merchant.create!(name: 'Tarjet')
+      merchant2 = Merchant.create!(name: 'Woodworkers Source')
+      item = merchant2.items.create!(name: 'item', enabled: true, description: Faker::Lorem.sentence(word_count: 3), unit_price: 3499)
+      invoice = Customer.find(1).invoices.create!(status: 1)
+      invoice.invoice_items.create!(quantity: 2, unit_price: 3499, status: 1, item_id: item.id)
+
+      expect(Merchant.find(5).distinct_invoices.sort).to eq([Invoice.find(18), Invoice.find(19), Invoice.find(20), Invoice.find(60), Invoice.find(61)].sort)
+      expect(merchant1.distinct_invoices).to eq([])
+      expect(merchant2.distinct_invoices).to eq([invoice])
+    end
+  end
 end
