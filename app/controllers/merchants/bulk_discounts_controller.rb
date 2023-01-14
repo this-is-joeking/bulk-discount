@@ -23,7 +23,7 @@ class Merchants::BulkDiscountsController < ApplicationController
       redirect_to merchant_bulk_discounts_path(merchant)
     else
       flash[:notice] = bd.errors.full_messages.to_sentence
-      redirect_to new_merchant_bulk_discount_path
+      redirect_to new_merchant_bulk_discount_path(merchant)
     end
   end
 
