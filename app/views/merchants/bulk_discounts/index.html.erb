@@ -5,7 +5,8 @@
   <% @bulk_discounts.each do |bd| %>
     <li id="bd-<%= bd.id %>">
       <%= "#{bd.discount}% off with purchase of #{bd.qty_threshold} items" %>
-      <%= link_to "View", merchant_bulk_discount_path(@merchant, bd) %>
+      <p><%= link_to "View", merchant_bulk_discount_path(@merchant, bd) %>
+      <%= link_to "Delete", merchant_bulk_discount_path(@merchant, bd), method: :delete %></p>
     </li>
   <% end %>
 </ul>
