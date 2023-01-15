@@ -33,15 +33,20 @@ RSpec.describe Invoice do
         merchant = Merchant.find(1)
         merchant.bulk_discounts.create!(discount: 10, qty_threshold: 9)
 
+        expect(invoice.total_discounted_revenue).to eq('$20,857.85')
+        
         merchant1 = Merchant.create!(name: 'ShoeLaLa')
         bd = merchant1.bulk_discounts.create!(discount:20, qty_threshold: 10)
         itm = merchant1.items.create!(name: 'NewBalance 525', description: 'Classic Dad shoe', unit_price: 10000)
         cust = Customer.find(1)
         invoice1 = cust.invoices.create!(status: 2)
-        ii = invoice1.invoice_items.create!(quantity: 10, unit_price: 10000, status: 2, item_id: itm.id)
+        invoice1.invoice_items.create!(quantity: 10, unit_price: 10000, status: 2, item_id: itm.id)
 
-        expect(invoice1.total_discounted_revenue).to eq(80_000)
-        expect(invoice.total_discounted_revenue).to eq(2_085_785)
+        expect(invoice1.total_discounted_revenue).to eq('$800.00')
+
+        invoice1.invoice_items.create!(quantity: 1, unit_price: 10000, status: 2, item_id: itm.id)
+
+        expect(invoice1.total_discounted_revenue).to eq('$900.00')
       end
     end
   end
