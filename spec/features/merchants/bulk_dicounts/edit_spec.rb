@@ -20,6 +20,7 @@ RSpec.describe 'merchant bulk_discount edit page' do
     expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @bd1))
     expect(page).to have_content("Discount: 10%")
     expect(page).to have_content("Quantity threshold for discount to apply: 3 items")
+    expect(page).to have_content('Bulk Discount Updated')
   end
 
   it 'will provide error message and remain on edit page if given invalid attributes' do

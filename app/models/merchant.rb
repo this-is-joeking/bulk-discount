@@ -64,4 +64,8 @@ class Merchant < ApplicationRecord
          .distinct
          .limit(5)
   end
+
+  def distinct_invoices
+    self.invoices.distinct
+  end
 end

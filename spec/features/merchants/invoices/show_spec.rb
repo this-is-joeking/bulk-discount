@@ -61,4 +61,14 @@ RSpec.describe 'Merchants Invoice Show' do
       expect(page).to have_select('invoice_item[status]', selected: 'Pending')
     end
   end
+
+  it 'has a separate category  of total revenue including bulk discounts' do
+    merchant = Merchant.find(1)
+    invoice = merchant.invoices.first
+    bd = merchant.bulk_discounts.create!(discount: 10, qty_threshold: 9)
+    visit merchant_invoice_path(merchant, invoice)
+
+    expect(page).to have_content("Total invoice revenue: $21,067.77")
+    expect(page).to have_content("Total invoice revenue including bulk discount(s): $20,857.85")
+  end
 end
