@@ -40,4 +40,14 @@ RSpec.describe 'Admin Invoice Show' do
       click_button 'Update Invoice Status'
     end
   end
+
+  it 'Displays the discounted revenue for the invoice' do
+    merchant = Merchant.find(1)
+    merchant.bulk_discounts.create!(discount: 10, qty_threshold: 9)
+
+    visit admin_invoice_path(Invoice.first.id)
+
+    expect(page).to have_content('Discounted Invoice Total: $20,857.85')
+  end
+
 end
