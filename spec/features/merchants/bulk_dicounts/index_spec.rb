@@ -50,4 +50,14 @@ RSpec.describe 'merchant/bulk discounts index page' do
     expect(page).to_not have_content(@bd1.discount)
     expect(page).to_not have_content(@bd1.qty_threshold)
   end
+
+  it 'has a section for upcoming holidays that lists the next 3 holidays' do
+    visit merchant_bulk_discounts_path(@merchant1)
+
+    expect(page).to have_content('Upcoming Holidays')
+    expect(page).to have_content('Presidents Day 2023-02-20')
+    expect(page).to have_content('Good Friday 2023-04-07')
+    expect(page).to have_content('Martin Luther King, Jr. Day 2023-01-16')
+    # expect(page).to have_content('Memorial Day 2023-05-29')
+  end
 end

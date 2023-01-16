@@ -3,6 +3,8 @@ class Merchants::BulkDiscountsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
 
     @bulk_discounts = @merchant.bulk_discounts
+
+    @holidays = HolidayInfo.new
   end
 
   def show
