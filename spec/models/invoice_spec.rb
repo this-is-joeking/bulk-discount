@@ -49,6 +49,15 @@ RSpec.describe Invoice do
 
         expect(invoice1.total_discounted_revenue).to eq('$900.00')
       end
+
+      it 'will use the biggest bulk discount applicable on an invoice' do
+        invoice = Invoice.find(1)
+        merchant = Merchant.find(1)
+        merchant.bulk_discounts.create!(discount: 10, qty_threshold: 7)
+        merchant.bulk_discounts.create!(discount: 20, qty_threshold: 9)
+
+        expect(invoice.total_discounted_revenue).to eq('$19,814.97')
+      end
     end
   end
 end
