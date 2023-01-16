@@ -20,8 +20,7 @@ RSpec.describe 'merchant/bulk discounts index page' do
         expect(page).to have_link("View", href: merchant_bulk_discount_path(@merchant1, bd))
       end
     end
-    expect(page).to_not have_content(@bd4.discount)
-    expect(page).to_not have_content(@bd4.qty_threshold)
+    expect(page).to_not have_content("11% off with purchase of 7 items")
   end
 
   it 'has a link to create a new bulk discount' do

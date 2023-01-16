@@ -51,34 +51,4 @@ RSpec.describe 'The Merchant Dashboard' do
 
     expect(page).to have_link('Bulk Discounts', href: merchant_bulk_discounts_path(1))
   end
-
-  # xit 'displays the name of the github repo' do
-  #   visit merchant_dashboard_path(1)
-
-  #   expect(page).to have_content("sambcox/little-esty-shop")
-  # end
-
-  # xit 'displays all contibutors usernames' do
-  #   visit merchant_dashboard_path(1)
-
-  #   expect(page).to have_content('sambcox')
-  #   expect(page).to have_content('this-is-joeking')
-  #   expect(page).to have_content('ryancanton')
-  #   expect(page).to have_content('Mike-Cummins')
-  # end
-
-  # xit 'displays the number of commits next to each github username' do
-  #   visit merchant_dashboard_path(1)
-
-  #   expect(page).to have_content('sambcox 66 commits')
-  #   expect(page).to have_content('this-is-joeking 33 commits')
-  #   expect(page).to have_content('ryancanton 36 commits')
-  #   expect(page).to have_content('Mike-Cummins 37 commits')
-  # end
-
-  # xit 'displays the number of merged PRs for all team members' do
-  #   visit merchant_dashboard_path(1)
-
-  #   expect(page).to have_content('54 Merged PRs')
-  # end
 end
