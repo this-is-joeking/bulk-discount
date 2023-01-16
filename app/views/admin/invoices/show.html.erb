@@ -13,6 +13,7 @@
 
 Invoice Created: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %><br>
 Invoice Total: <%= @invoice.total_invoice_revenue %>
+Discounted Invoice Total: <%= @invoice.total_discounted_revenue %>
 <h3>Customer:</h3>
 <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
 <br>
