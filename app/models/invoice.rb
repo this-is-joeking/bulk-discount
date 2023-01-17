@@ -18,9 +18,11 @@ class Invoice < ApplicationRecord
   end
 
   def total_discounted_revenue
-    number_to_currency(self.invoice_items.joins(:bulk_discounts)
-    .sum('(CASE WHEN invoice_items.quantity >= bulk_discounts.qty_threshold 
-      THEN invoice_items.quantity * invoice_items.unit_price / 100.00 * (1 - bulk_discounts.discount / 100.00) 
-      ELSE invoice_items.quantity * invoice_items.unit_price / 100.00 END)'))
+  number_to_currency(self.invoice_items.left_joins(item: :bulk_discounts)
+    .sum('0.01 * invoice_items.quantity * invoice_items.unit_price * (CASE 
+      WHEN invoice_items.quantity >= bulk_discounts.qty_threshold 
+      THEN (1 - bulk_discounts.discount / 100.00) 
+      ELSE 1 
+      END)'))
   end
 end
