@@ -99,6 +99,19 @@ RSpec.describe Invoice do
 
         expect(invoice1.total_discounted_revenue).to eq('$19,814.97')
       end
+
+      it 'will not apply a discount if thresholds are not met' do
+        merchant = Merchant.create!(name: 'ShoeLaLa')
+        bd = merchant.bulk_discounts.create!(discount:20, qty_threshold: 10)
+        item1 = merchant.items.create!(name: 'NewBalance 525', description: 'Classic Dad shoe', unit_price: 10000)
+        item2 = merchant.items.create!(name: 'NewBalance 301', description: 'New Dad shoe', unit_price: 12500)
+        cust = Customer.find(1)
+        invoice = cust.invoices.create!(status: 2)
+        invoice.invoice_items.create!(quantity: 5, unit_price: 10000, status: 2, item_id: item1.id)
+        invoice.invoice_items.create!(quantity: 5, unit_price: 10000, status: 2, item_id: item2.id)
+
+        expect(invoice.total_discounted_revenue).to eq(invoice.total_invoice_revenue)
+      end
     end
 
     describe '#merchant_discounted_revenue()' do
