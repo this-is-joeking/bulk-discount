@@ -17,6 +17,11 @@ class Invoice < ApplicationRecord
     number_to_currency(self.invoice_items.sum('invoice_items.quantity * invoice_items.unit_price') / 100.0)
   end
 
+  def merchant_invoice_revenue(merchant)
+    number_to_currency(self.items.where('items.merchant_id = ?', merchant.id)
+      .sum('invoice_items.quantity * invoice_items.unit_price') / 100.0)
+  end
+
   def total_discounted_revenue
   number_to_currency(self.invoice_items.left_joins(item: :bulk_discounts)
     .sum('0.01 * invoice_items.quantity * invoice_items.unit_price * (CASE 

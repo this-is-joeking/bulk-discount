@@ -28,6 +28,13 @@ RSpec.describe Invoice do
       end
     end
 
+    describe '#merchant_invoice_revenue()' do
+      it 'returns the total revenue for a specific invoice for given merchant' do
+        expect(Invoice.find(1).merchant_invoice_revenue(Merchant.find(1))).to eq('$21,067.77')
+        expect(Invoice.find(1).merchant_invoice_revenue(Merchant.find(2))).to eq('$0.00')
+      end
+    end
+
     describe '#total_discounted_revenue' do
       it 'returns the total revenue less applicable bulk discounts' do
         invoice = Invoice.find(1)
