@@ -76,5 +76,32 @@ RSpec.describe Invoice do
         expect(invoice1.total_discounted_revenue).to eq('$19,814.97')
       end
     end
+
+    describe '#merchant_discounted_revenue()' do
+      it 'calculate the total discounted revenue for the given merchant' do
+        invoice1 = Invoice.find(1)
+        merchant1 = Merchant.find(1)
+        merchant1.bulk_discounts.create!(discount: 10, qty_threshold: 7)
+        merchant1.bulk_discounts.create!(discount: 20, qty_threshold: 9)
+
+        merchant2 = Merchant.create!(name: 'ShoeLaLa')
+        bd1 = merchant2.bulk_discounts.create!(discount:20, qty_threshold: 10)
+        bd2 = merchant2.bulk_discounts.create!(discount:10, qty_threshold: 5)
+        itm = merchant2.items.create!(name: 'NewBalance 525', description: 'Classic Dad shoe', unit_price: 10000)
+        cust = Customer.find(1)
+        invoice2 = cust.invoices.create!(status: 2)
+        invoice2.invoice_items.create!(quantity: 10, unit_price: 10000, status: 2, item_id: itm.id)
+
+        expect(invoice2.merchant_discounted_revenue(merchant2)).to eq('$800.00')
+        expect(invoice2.merchant_discounted_revenue(merchant1)).to eq('$0.00')
+
+        invoice2.invoice_items.create!(quantity: 9, unit_price: 1000, status: 2, item_id: 1)
+
+        expect(invoice2.merchant_discounted_revenue(merchant1)).to eq('$72.00')
+
+        expect(invoice1.merchant_discounted_revenue(merchant1)).to eq('$19,814.97')
+        expect(invoice1.merchant_discounted_revenue(merchant2)).to eq('$0.00')
+      end
+    end
   end
 end
