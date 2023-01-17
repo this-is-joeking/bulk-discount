@@ -17,10 +17,30 @@ class Invoice < ApplicationRecord
     number_to_currency(self.invoice_items.sum('invoice_items.quantity * invoice_items.unit_price') / 100.0)
   end
 
+  def merchant_invoice_revenue(merchant)
+    number_to_currency(self.items.where('items.merchant_id = ?', merchant.id)
+      .sum('invoice_items.quantity * invoice_items.unit_price') / 100.0)
+  end
+
   def total_discounted_revenue
-    number_to_currency(self.invoice_items.joins(:bulk_discounts)
-    .sum('(CASE WHEN invoice_items.quantity >= bulk_discounts.qty_threshold 
-      THEN invoice_items.quantity * invoice_items.unit_price / 100.00 * (1 - bulk_discounts.discount / 100.00) 
-      ELSE invoice_items.quantity * invoice_items.unit_price / 100.00 END)'))
+    sq = self.invoice_items.left_joins(:bulk_discounts)
+      .select('invoice_items.*, min(0.01 * invoice_items.quantity * invoice_items.unit_price * (CASE 
+        WHEN invoice_items.quantity >= bulk_discounts.qty_threshold 
+        THEN (1 - bulk_discounts.discount / 100.00) 
+        ELSE 1 
+        END)) as revenue').group(:id)
+    
+    number_to_currency(Item.from(sq).sum('revenue'))
+  end
+
+  def merchant_discounted_revenue(merchant)
+    sq = self.invoice_items.left_joins(item: :bulk_discounts).where('items.merchant_id = ?', merchant.id)
+      .select('invoice_items.*, min(0.01 * invoice_items.quantity * invoice_items.unit_price * (CASE 
+        WHEN invoice_items.quantity >= bulk_discounts.qty_threshold 
+        THEN (1 - bulk_discounts.discount / 100.00) 
+        ELSE 1 
+        END)) as revenue').group(:id)
+    
+    number_to_currency(Item.from(sq).sum('revenue'))
   end
 end

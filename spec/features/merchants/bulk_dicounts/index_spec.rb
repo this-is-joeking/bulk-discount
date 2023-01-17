@@ -20,8 +20,7 @@ RSpec.describe 'merchant/bulk discounts index page' do
         expect(page).to have_link("View", href: merchant_bulk_discount_path(@merchant1, bd))
       end
     end
-    expect(page).to_not have_content(@bd4.discount)
-    expect(page).to_not have_content(@bd4.qty_threshold)
+    expect(page).to_not have_content("11% off with purchase of 7 items")
   end
 
   it 'has a link to create a new bulk discount' do
@@ -57,7 +56,6 @@ RSpec.describe 'merchant/bulk discounts index page' do
     expect(page).to have_content('Upcoming Holidays')
     expect(page).to have_content('Presidents Day 2023-02-20')
     expect(page).to have_content('Good Friday 2023-04-07')
-    expect(page).to have_content('Martin Luther King, Jr. Day 2023-01-16')
-    # expect(page).to have_content('Memorial Day 2023-05-29')
+    expect(page).to have_content('Memorial Day 2023-05-29')
   end
 end

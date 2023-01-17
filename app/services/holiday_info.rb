@@ -6,8 +6,7 @@ class HolidayInfo
   end
 
   def next_three
-    next_three_holidays = @holidays.first(3)
-    x = next_three_holidays.map do |holiday|
+    @holidays.first(3).map do |holiday|
       holiday[:localName] + " " +  holiday[:date]
     end
   end
