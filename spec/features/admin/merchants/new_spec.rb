@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Admin Merchant New' do
@@ -18,10 +20,10 @@ RSpec.describe 'Admin Merchant New' do
   it 'Will not create if name is blank' do
     visit new_admin_merchant_path
 
-    fill_in('merchant[name]', with: "")
+    fill_in('merchant[name]', with: '')
     click_button('Create Merchant')
 
     expect(current_path).to eq(new_admin_merchant_path)
-    expect(page).to have_content("Merchant must have a name")
+    expect(page).to have_content('Merchant must have a name')
   end
 end

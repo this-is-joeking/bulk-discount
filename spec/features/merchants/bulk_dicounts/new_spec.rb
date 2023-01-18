@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'merchants bulk discount new page' do
@@ -10,11 +12,11 @@ RSpec.describe 'merchants bulk discount new page' do
 
     fill_in 'bulk_discount[discount]', with: '10'
     fill_in 'bulk_discount[qty_threshold]', with: '3'
-    
+
     click_button 'Submit'
 
     expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
-    expect(page).to have_content("10% off with purchase of 3 items")
+    expect(page).to have_content('10% off with purchase of 3 items')
   end
 
   it 'will display an appropriate error message if you enter something invalid on the form' do
@@ -24,8 +26,8 @@ RSpec.describe 'merchants bulk discount new page' do
     fill_in 'bulk_discount[qty_threshold]', with: '1'
 
     click_button 'Submit'
-    
+
     expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1))
-    expect(page).to have_content("Discount must be less than 100 and Qty threshold must be greater than 1")
+    expect(page).to have_content('Discount must be less than 100 and Qty threshold must be greater than 1')
   end
 end

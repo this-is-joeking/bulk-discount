@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Admin Invoice Show' do
@@ -49,5 +51,4 @@ RSpec.describe 'Admin Invoice Show' do
 
     expect(page).to have_content('Discounted Invoice Total: $20,857.85')
   end
-
 end

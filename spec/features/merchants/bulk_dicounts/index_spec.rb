@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'merchant/bulk discounts index page' do
@@ -17,16 +19,16 @@ RSpec.describe 'merchant/bulk discounts index page' do
       within "#bd-#{bd.id}" do
         expect(page).to have_content("#{bd.discount}%")
         expect(page).to have_content("#{bd.qty_threshold} items")
-        expect(page).to have_link("View", href: merchant_bulk_discount_path(@merchant1, bd))
+        expect(page).to have_link('View', href: merchant_bulk_discount_path(@merchant1, bd))
       end
     end
-    expect(page).to_not have_content("11% off with purchase of 7 items")
+    expect(page).to_not have_content('11% off with purchase of 7 items')
   end
 
   it 'has a link to create a new bulk discount' do
     visit merchant_bulk_discounts_path(@merchant1)
 
-    expect(page).to have_link("Create a New Bulk Discount", href: new_merchant_bulk_discount_path(@merchant1))
+    expect(page).to have_link('Create a New Bulk Discount', href: new_merchant_bulk_discount_path(@merchant1))
   end
 
   it 'has a link to delete each bulk discount' do
@@ -37,12 +39,12 @@ RSpec.describe 'merchant/bulk discounts index page' do
 
     @merchant1.bulk_discounts.each do |bd|
       within "#bd-#{bd.id}" do
-        expect(page).to have_link("Delete", href: merchant_bulk_discount_path(@merchant1, bd))
+        expect(page).to have_link('Delete', href: merchant_bulk_discount_path(@merchant1, bd))
       end
     end
 
     within "#bd-#{@bd1.id}" do
-      click_link "Delete"
+      click_link 'Delete'
     end
 
     expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))

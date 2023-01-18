@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
@@ -16,6 +18,7 @@ class InvoiceItem < ApplicationRecord
   end
 
   def bulk_discount
-    self.bulk_discounts.where('bulk_discounts.qty_threshold <= ?', self.quantity).order('bulk_discounts.discount desc').first
+    self.bulk_discounts.where('bulk_discounts.qty_threshold <= ?',
+                              self.quantity).order('bulk_discounts.discount desc').first
   end
 end

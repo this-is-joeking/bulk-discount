@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BulkDiscount < ApplicationRecord
   belongs_to :merchant
   has_many :items, through: :merchant

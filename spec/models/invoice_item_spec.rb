@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe InvoiceItem do
@@ -5,8 +7,8 @@ RSpec.describe InvoiceItem do
     it { should belong_to :invoice }
     it { should belong_to :item }
     it { should have_many(:transactions).through(:invoice) }
-    it { should have_one(:merchant).through(:item)}
-    it { should have_many(:bulk_discounts).through(:merchant)}
+    it { should have_one(:merchant).through(:item) }
+    it { should have_many(:bulk_discounts).through(:merchant) }
     it { should validate_numericality_of :quantity }
     it { should validate_numericality_of :unit_price }
   end
@@ -33,12 +35,12 @@ RSpec.describe InvoiceItem do
       expect(ii2.discounted?).to eq true
 
       merchant1 = Merchant.create!(name: 'ShoeLaLa')
-      bd = merchant1.bulk_discounts.create!(discount:20, qty_threshold: 10)
-      itm = merchant1.items.create!(name: 'NewBalance 525', description: 'Classic Dad shoe', unit_price: 10000)
+      merchant1.bulk_discounts.create!(discount: 20, qty_threshold: 10)
+      itm = merchant1.items.create!(name: 'NewBalance 525', description: 'Classic Dad shoe', unit_price: 10_000)
       cust = Customer.find(1)
       invoice1 = cust.invoices.create!(status: 2)
-      ii3 = invoice1.invoice_items.create!(quantity: 10, unit_price: 10000, status: 2, item_id: itm.id)
-      
+      ii3 = invoice1.invoice_items.create!(quantity: 10, unit_price: 10_000, status: 2, item_id: itm.id)
+
       expect(ii3.discounted?).to eq true
     end
   end
@@ -46,15 +48,15 @@ RSpec.describe InvoiceItem do
   describe '#bulk_discount' do
     it 'if a discount applies it returns the single applicable discount for an invoice item' do
       merchant1 = Merchant.create!(name: 'ShoeLaLa')
-      bd = merchant1.bulk_discounts.create!(discount:10, qty_threshold: 5)
-      itm = merchant1.items.create!(name: 'NewBalance 525', description: 'Classic Dad shoe', unit_price: 10000)
+      bd = merchant1.bulk_discounts.create!(discount: 10, qty_threshold: 5)
+      itm = merchant1.items.create!(name: 'NewBalance 525', description: 'Classic Dad shoe', unit_price: 10_000)
       cust = Customer.find(1)
       invoice1 = cust.invoices.create!(status: 2)
-      ii = invoice1.invoice_items.create!(quantity: 10, unit_price: 10000, status: 2, item_id: itm.id)
+      ii = invoice1.invoice_items.create!(quantity: 10, unit_price: 10_000, status: 2, item_id: itm.id)
 
       expect(ii.bulk_discount).to eq(bd)
 
-      bd2 = merchant1.bulk_discounts.create!(discount:20, qty_threshold: 10)
+      bd2 = merchant1.bulk_discounts.create!(discount: 20, qty_threshold: 10)
 
       expect(ii.bulk_discount).to eq(bd2)
 

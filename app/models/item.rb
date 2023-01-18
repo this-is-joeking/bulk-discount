@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   belongs_to :merchant
   has_many :invoice_items, dependent: :destroy
@@ -17,12 +19,12 @@ class Item < ApplicationRecord
 
   def best_day_by_revenue
     self.invoices.joins(:transactions)
-            .where(transactions: { result: 'success' })
-            .select('date(invoices.created_at) as invoice_date, sum(invoice_items.unit_price * invoice_items.quantity) as total_date_revenue')
-            .group('invoice_date')
-            .order('total_date_revenue DESC', 'invoice_date DESC')
-            .limit(1)
-            .first
-            .invoice_date.strftime('%-m/%-d/%Y')
+        .where(transactions: { result: 'success' })
+        .select('date(invoices.created_at) as invoice_date, sum(invoice_items.unit_price * invoice_items.quantity) as total_date_revenue')
+        .group('invoice_date')
+        .order('total_date_revenue DESC', 'invoice_date DESC')
+        .limit(1)
+        .first
+        .invoice_date.strftime('%-m/%-d/%Y')
   end
 end

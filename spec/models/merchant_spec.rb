@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Merchant do
@@ -25,14 +27,14 @@ RSpec.describe Merchant do
   describe '#ready_to_ship_items' do
     it 'returns the items that are ordered but not shipped for the given merchant' do
       merchants_ready_items = Merchant.find(1).ready_to_ship_items
-      new_merchant = Merchant.create!(name: "Bob")
-      
+      new_merchant = Merchant.create!(name: 'Bob')
+
       merchants_ready_items.each do |item|
         expect(item).to be_a Item
         expect(item.merchant_id).to eq(1)
         expect(item.status).to eq(1)
       end
-      
+
       expect(new_merchant.ready_to_ship_items).to eq([])
       expect(merchants_ready_items.length).to eq(16)
     end
@@ -116,11 +118,13 @@ RSpec.describe Merchant do
     it 'returns distinct invoices related to the merchant' do
       merchant1 = Merchant.create!(name: 'Tarjet')
       merchant2 = Merchant.create!(name: 'Woodworkers Source')
-      item = merchant2.items.create!(name: 'item', enabled: true, description: Faker::Lorem.sentence(word_count: 3), unit_price: 3499)
+      item = merchant2.items.create!(name: 'item', enabled: true, description: Faker::Lorem.sentence(word_count: 3),
+                                     unit_price: 3499)
       invoice = Customer.find(1).invoices.create!(status: 1)
       invoice.invoice_items.create!(quantity: 2, unit_price: 3499, status: 1, item_id: item.id)
 
-      expect(Merchant.find(5).distinct_invoices.sort).to eq([Invoice.find(18), Invoice.find(19), Invoice.find(20), Invoice.find(60), Invoice.find(61)].sort)
+      expect(Merchant.find(5).distinct_invoices.sort).to eq([Invoice.find(18), Invoice.find(19), Invoice.find(20),
+                                                             Invoice.find(60), Invoice.find(61)].sort)
       expect(merchant1.distinct_invoices).to eq([])
       expect(merchant2.distinct_invoices).to eq([invoice])
     end

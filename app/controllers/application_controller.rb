@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include ActionView::Helpers::NumberHelper
   # before_action :github
