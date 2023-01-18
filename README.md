@@ -12,7 +12,7 @@
 
 ## Schema/Database
    
-   ![alt text](https://i.ibb.co/ZXQP3nw/Screen-Shot-2023-01-11-at-3-27-01-PM.png "Database/Schema Image")
+   ![alt text](https://i.ibb.co/LNKtnLD/Screen-Shot-2023-01-13-at-2-17-17-PM.png "Database/Schema Image")
 
 ## Heroku Deployment
    [Here is our deployed Heroku App!](https://secure-cliffs-86927.herokuapp.com)
