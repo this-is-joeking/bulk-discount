@@ -2,7 +2,7 @@
 
 ## Collaborators
 - Samuel Cox - [sambcox](https://www.github.com/sambcox)
-- Joe King - [this-is-joeking](https://www.github.com/this-is-joeking)
+- Joe King - [this-is-joeking](https://www.github.com/this-is-joeking) - Completed entirety of the bulk discount portion of this repository
 - Ryan Canton - [ryancanton](https://www.github.com/ryancanton)
 - Mike Cummins - [Mike-Cummins](https://www.github.com/Mike-Cummins)
 
