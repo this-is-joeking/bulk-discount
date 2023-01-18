@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'merchant bulk_discount edit page' do
@@ -14,12 +16,12 @@ RSpec.describe 'merchant bulk_discount edit page' do
 
     fill_in 'bulk_discount[discount]', with: '10'
     fill_in 'bulk_discount[qty_threshold]', with: '3'
-    
+
     click_button 'Submit'
 
     expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @bd1))
-    expect(page).to have_content("Discount: 10%")
-    expect(page).to have_content("Quantity threshold for discount to apply: 3 items")
+    expect(page).to have_content('Discount: 10%')
+    expect(page).to have_content('Quantity threshold for discount to apply: 3 items')
     expect(page).to have_content('Bulk Discount Updated')
   end
 
@@ -28,7 +30,7 @@ RSpec.describe 'merchant bulk_discount edit page' do
 
     fill_in 'bulk_discount[discount]', with: '-1'
     fill_in 'bulk_discount[qty_threshold]', with: '1'
-    
+
     click_button 'Submit'
 
     expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant1, @bd1))

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Merchants Invoice Show' do
@@ -65,11 +67,11 @@ RSpec.describe 'Merchants Invoice Show' do
   it 'has a separate category  of total revenue including bulk discounts' do
     merchant = Merchant.find(1)
     invoice = merchant.invoices.first
-    bd = merchant.bulk_discounts.create!(discount: 10, qty_threshold: 9)
+    merchant.bulk_discounts.create!(discount: 10, qty_threshold: 9)
     visit merchant_invoice_path(merchant, invoice)
 
-    expect(page).to have_content("Total invoice revenue: $21,067.77")
-    expect(page).to have_content("Total invoice revenue including bulk discount(s): $20,857.85")
+    expect(page).to have_content('Total invoice revenue: $21,067.77')
+    expect(page).to have_content('Total invoice revenue including bulk discount(s): $20,857.85')
   end
 
   it 'has a link to the applied bulk discount show page next to invoice items with applicable discounts' do
@@ -80,9 +82,9 @@ RSpec.describe 'Merchants Invoice Show' do
     visit merchant_invoice_path(merchant, invoice)
 
     within "#item_#{ii.id}" do
-      expect(page).to have_link("10% off applied", href: merchant_bulk_discount_path(merchant, bd))
+      expect(page).to have_link('10% off applied', href: merchant_bulk_discount_path(merchant, bd))
     end
 
-    expect(page).to have_link("10% off applied", href: merchant_bulk_discount_path(merchant, bd)).once
+    expect(page).to have_link('10% off applied', href: merchant_bulk_discount_path(merchant, bd)).once
   end
 end

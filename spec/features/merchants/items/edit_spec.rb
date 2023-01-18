@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'merchant item edit page' do
@@ -12,7 +14,6 @@ RSpec.describe 'merchant item edit page' do
 
   it 'updates the item when new info is entered on the form and submitted' do
     visit edit_merchant_item_path(1, 10)
-    item = Item.find(10)
 
     fill_in 'item[name]', with: 'New item name'
     fill_in 'item[description]', with: 'Fancy item does fancy things'
@@ -31,7 +32,6 @@ RSpec.describe 'merchant item edit page' do
 
   it 'does not update if missing attributes' do
     visit edit_merchant_item_path(1, 10)
-    item = Item.find(10)
 
     fill_in 'item[name]', with: 'New item name'
     fill_in 'item[description]', with: ''

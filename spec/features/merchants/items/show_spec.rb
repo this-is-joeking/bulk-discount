@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'merchants item show page' do
   it 'shows all of the items attributes' do
-
     visit '/merchants/1/items/10'
 
     item = Item.find(10)

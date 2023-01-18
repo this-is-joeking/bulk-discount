@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Item do
@@ -40,10 +42,10 @@ RSpec.describe Item do
       item2 = Item.create!(name: 'FlexTape', description: 'Seals things', unit_price: 2499, merchant_id: 1)
       customer = Customer.find(1)
       invoice = customer.invoices.create!(status: 2)
-      transaction = invoice.transactions.create!(credit_card_number: 1_234_567_890_987, result: 'success')
+      invoice.transactions.create!(credit_card_number: 1_234_567_890_987, result: 'success')
       InvoiceItem.create!(invoice_id: invoice.id, item_id: item2.id, quantity: 12, unit_price: 2499, status: 2)
 
-      item3 = Item.create!(name: 'FlexSeal', description: 'Seals things', unit_price: 2799, merchant_id: 1)
+      Item.create!(name: 'FlexSeal', description: 'Seals things', unit_price: 2799, merchant_id: 1)
 
       expect(item.best_day_by_revenue).to eq('3/14/2012')
       expect(item2.best_day_by_revenue).to eq(Time.now.utc.strftime('%-m/%-d/%Y'))

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Merchants
   class ItemsController < ApplicationController
     def index

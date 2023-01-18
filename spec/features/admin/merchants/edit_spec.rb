@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Admin Merchant Edit' do
@@ -20,10 +22,10 @@ RSpec.describe 'Admin Merchant Edit' do
   it 'Will not update if name is blank' do
     visit edit_admin_merchant_path(Merchant.all.first)
 
-    fill_in('merchant[name]', with: "")
+    fill_in('merchant[name]', with: '')
     click_button('Update Merchant')
 
     expect(current_path).to eq(edit_admin_merchant_path(Merchant.all.first))
-    expect(page).to have_content("Merchant must have a name")
+    expect(page).to have_content('Merchant must have a name')
   end
 end

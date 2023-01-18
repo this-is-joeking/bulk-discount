@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :invoices
   has_many :items, through: :invoice_items
   validates_presence_of :first_name, :last_name
-  
+
   def self.top_5_by_transactions
     Customer.left_joins(:transactions)
             .select('customers.*, count(transactions) as transaction_count')

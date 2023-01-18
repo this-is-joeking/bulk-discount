@@ -1,22 +1,26 @@
-class Admin::InvoicesController < ApplicationController
-  def index
-    @invoices = Invoice.all
-  end
+# frozen_string_literal: true
 
-  def show
-    @invoice = Invoice.find(params[:id])
-  end
+module Admin
+  class InvoicesController < ApplicationController
+    def index
+      @invoices = Invoice.all
+    end
 
-  def update
-    invoice = Invoice.find(params[:id])
-    invoice.update!(invoice_params)
+    def show
+      @invoice = Invoice.find(params[:id])
+    end
 
-    redirect_to "/admin/invoices/#{invoice.id}"
-  end
+    def update
+      invoice = Invoice.find(params[:id])
+      invoice.update!(invoice_params)
 
-  private
+      redirect_to "/admin/invoices/#{invoice.id}"
+    end
 
-  def invoice_params
-    params.permit(:status)
+    private
+
+    def invoice_params
+      params.permit(:status)
+    end
   end
 end
