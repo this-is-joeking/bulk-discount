@@ -34,10 +34,11 @@ class Invoice < ApplicationRecord
   end
 
   def total_discounted_revenue
-    number_to_currency(Item.from(discounted_rev_sub_query).sum('revenue'))
+    number_to_currency(Invoice.from(discounted_rev_sub_query).sum('revenue'))
   end
 
   def merchant_discounted_revenue(merchant)
-    number_to_currency(Item.from(discounted_rev_sub_query.where('items.merchant_id = ?', merchant.id)).sum('revenue'))
+    number_to_currency(Invoice.from(discounted_rev_sub_query.where('items.merchant_id = ?', merchant.id))
+                              .sum('revenue'))
   end
 end
