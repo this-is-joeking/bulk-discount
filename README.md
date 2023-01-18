@@ -8,7 +8,7 @@
 
 ## Description
 
-"Little Esty Shop" is a group project where we built a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices. We utilized rails to build application, and focused our learning on advanced routing, rake tasks that read csv files loading them into our database, complex ActiveRecord queries, simple consumption of GitHub's API, and basic CRUD funtionality while maintaining MVC standards. Our Database offers many different relationships (many-to-many or one-to-many) as shown by our schema outlined below.
+"Little Esty Shop" is a group project where we built a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices. We built the application with Ruby on Rails, and focused our learning on advanced routing, rake tasks that read csv files loading them into our database, complex ActiveRecord queries, simple consumption of [Nager.Date API](https://date.nager.at/swagger/index.html), and basic CRUD funtionality while maintaining MVC standards. Our Database offers many different relationships (many-to-many or one-to-many) as shown by our schema outlined below.
 
 ## Schema/Database
    
@@ -26,7 +26,7 @@ This project requires Ruby 2.7.4.
 * From the command line, install gems and set up your DB:
     * `bundle`
     * `rails db:{drop,create,migrate}`
-    * `rake csv_load:all`
+    * `rake csv_load:all` (this may take a couple minutes)
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
 
