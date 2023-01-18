@@ -32,5 +32,5 @@ This project requires Ruby 2.7.4.
 
 ## Opportunities to Refactor
 
-The main opportunity to refactor we identified is our rake task which loads CSV data into the database. Currently it adds rows to the database line by line. We could refactor this to use the gems `activerecord-copy` and `activerecord-import`. This would add each table to the database in entirety instead of row by row reducing the time to load data significantly. Additionally, the file that parses the csv could be abstracted to multiple files.
-
+* The main opportunity to refactor we identified is our rake task which loads CSV data into the database. Currently it adds rows to the database line by    line. We could refactor this to use the gems `activerecord-copy` and `activerecord-import`. This would add each table to the database in entirety        instead of row by row reducing the time to load data significantly. Additionally, the file that parses the csv could be abstracted to multiple files.
+* Cleanup date formatting for upcoming holidays
