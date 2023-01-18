@@ -1,4 +1,4 @@
-# Little Esty Shop
+# Little Esty Shop/Bulk Discount
 
 ## Collaborators
 - Samuel Cox - [sambcox](https://www.github.com/sambcox)
