@@ -24,6 +24,8 @@ class Invoice < ApplicationRecord
       .sum('invoice_items.quantity * invoice_items.unit_price') / 100.0)
   end
 
+  # Using AR and SQL to find the invoice revenue with bulk discounts applied
+
   def discounted_rev_sub_query
     self.invoice_items.left_joins(:bulk_discounts)
         .select('invoice_items.*, min(0.01 * invoice_items.quantity * invoice_items.unit_price * (CASE
